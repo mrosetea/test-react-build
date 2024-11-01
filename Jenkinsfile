@@ -15,10 +15,22 @@ pipeline {
                 sh 'npm install --production'
             }
         }
-        stage('Testing') {
+        stage('Test') {
                     steps {
-                        // Instala dependencias
-                        sh 'npm run test'
+                        sh 'npm run test -- --coverage'
+                    }
+                }
+                stage('Verify Coverage') {
+                    steps {
+                        script {
+                            def coverage = readJSON file: 'coverage/coverage-summary.json'
+                            def globalCoverage = coverage.total.lines.pct
+                            if (globalCoverage < 90) {
+                                error("La cobertura de pruebas es inferior al 90%: ${globalCoverage}%")
+                            } else {
+                                echo "La cobertura de pruebas es suficiente: ${globalCoverage}%"
+                            }
+                        }
                     }
                 }
         stage('Build') {
