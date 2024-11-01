@@ -23,7 +23,7 @@ pipeline {
                 stage('Verify Coverage') {
                     steps {
                         script {
-                            def coverage = readJSON file: 'coverage/coverage-summary.json'
+                            def coverage = readJSON file: 'coverage/coverage-final.json'
                             def globalCoverage = coverage.total.lines.pct
                             if (globalCoverage < 90) {
                                 error("La cobertura de pruebas es inferior al 90%: ${globalCoverage}%")
