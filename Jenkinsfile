@@ -21,6 +21,11 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('Verify Build') {
+             steps {
+                sh 'ls -l build'
+             }
+        }
     }
     post {
         success {
