@@ -12,7 +12,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Instala dependencias
-                sh 'npm install'
+                sh 'npm install --production'
             }
         }
         stage('Build') {
