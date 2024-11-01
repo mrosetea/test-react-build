@@ -15,6 +15,12 @@ pipeline {
                 sh 'npm install --production'
             }
         }
+        stage('Testing') {
+                    steps {
+                        // Instala dependencias
+                        sh 'npm run test'
+                    }
+                }
         stage('Build') {
             steps {
                 // Construye la aplicación
