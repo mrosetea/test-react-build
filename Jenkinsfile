@@ -6,8 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Clona el código desde tu repositorio
-                git 'https://github.com/mrosetea/test-react-build.git'
+                git branch: 'main', url: 'https://github.com/mrosetea/test-react-build'
             }
         }
         stage('Install Dependencies') {
